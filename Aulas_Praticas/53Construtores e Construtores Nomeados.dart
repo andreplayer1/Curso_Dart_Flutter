@@ -9,6 +9,7 @@ void main() {
     nome: 'Kiara',
     classeRPG: 'Mago'
   );
+  //personagem1.guilda = 'Deuses do Olimpo';
   personagem2.atacar(personagem1);
 }
 
@@ -36,28 +37,31 @@ class Personagem {
 
   String nome;
   String classeRPG;
+  String ? guilda;
   int _nivel = 0;
   double _pontosDeVida = 0.0;
 
   void atacar(Personagem alvo) {
+    String nomeGuilda = guilda ?? 'Lobo Solitário';  
     if (classeRPG == 'Mago') {
       double dano = 50.0 + _nivel;
       print(
-        'O personagem $nome atacou o oponente ${alvo.nome} com força de nivel $dano',
+        'O personagem $nome da Guilda $nomeGuilda atacou o oponente ${alvo.nome} com força de nivel $dano',
       );
       alvo.sofrerDano(dano);
     } else {
       double dano = 0.0 + _nivel;
       print(
-        'O personagem $nome atacou o oponente ${alvo.nome} com força de nivel $dano',
+        'O personagem $nome da guilda $nomeGuilda atacou o oponente ${alvo.nome} com força de nivel $dano',
       );
       alvo.sofrerDano(dano);
     }
   }
 
   void sofrerDano(double dano) {
+    String nomeGuilda = guilda ?? 'Lobo Solitário';
     _pontosDeVida -= dano;
-    print('$nome sofreu um ataque \nVida: $_pontosDeVida');
+    print('$nome da guilda $nomeGuilda sofreu um ataque \nVida: $_pontosDeVida');
   }
 
   double get pontosDeVida {
