@@ -2,18 +2,24 @@ void main() {
   Personagem personagem1 = Personagem(
     nome: 'Kratos',
     classeRPG: 'Assassino',
-    nivel: 50,
+    nivel: 99,
     pontosDeVida: 2000,
   );
   Personagem personagem2 = Personagem.novato(
     nome: 'Kiara',
     classeRPG: 'Mago'
   );
-  //personagem1.guilda = 'Deuses do Olimpo';
+  personagem1.apresentacao();
+
+  personagem1.guilda = 'Deuses do Olimpo';
+
+  personagem1.gritoDeGuerra= 'POR ESPARTA!';
+
   personagem2.atacar(personagem1);
 }
 
 class Personagem {
+  static const int nivelMaximo = 99;
 
   Personagem({required this.nome, required this.classeRPG, required int nivel, required double pontosDeVida})
   {
@@ -41,6 +47,8 @@ class Personagem {
   int _nivel = 0;
   double _pontosDeVida = 0.0;
 
+  late String gritoDeGuerra = 'POR ESPARTA!';
+
   void atacar(Personagem alvo) {
     String nomeGuilda = guilda ?? 'Lobo Solitário';  
     if (classeRPG == 'Mago') {
@@ -64,6 +72,12 @@ class Personagem {
     print('$nome da guilda $nomeGuilda sofreu um ataque \nVida: $_pontosDeVida');
   }
 
+  void apresentacao() {
+    if(nome == 'Kratos'){
+      print(gritoDeGuerra);
+    }
+  }
+
   double get pontosDeVida {
     return _pontosDeVida;
   }
@@ -81,7 +95,7 @@ class Personagem {
   }
 
   set nivel(int valorAtual) {
-    if (valorAtual >= 1 && valorAtual <= 99) {
+    if (valorAtual >= 1 && valorAtual <= nivelMaximo) {
       _nivel = valorAtual;
     } else {
       _nivel = 1;
